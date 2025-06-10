@@ -8,8 +8,6 @@ const App = () => {
   const pokemon = pokemon_data
 
   const [page, setPage] = useState(0)
-
-  // let page = 0
   const pageLength = 10
   const pageLast = Math.ceil(pokemon.length / pageLength)
 
@@ -19,15 +17,13 @@ const App = () => {
     return pokemon.slice(itemFirst, itemLast)
   }
 
-  const changePage = (e) => {
-    e.preventDefault()
-    console.log(e)
-    setPage(page + 1)
-  }
-
   return (
     <>
       <h1>Pokedex</h1>
+      <button disabled={page === 0} onClick={() => setPage(0)}>First</button>
+      <button disabled={page === 0} onClick={() => setPage(page - 1)}>Prev</button>
+      <button disabled={page === pageLast - 1} onClick={() => setPage(page + 1)}>Next</button>
+      <button disabled={page === pageLast - 1} onClick={() => setPage(pageLast - 1)}>Last</button>
       <table>
         <thead>
           <tr>
@@ -55,8 +51,6 @@ const App = () => {
         </tbody>
       </table>
       <p>{`Page ${page + 1} of ${pageLast}`}</p>
-      <button disabled={page === 0}>Prev</button>
-      <button disabled={page === pageLast - 1} onClick={changePage}>Next</button>
     </>
   )
 }
