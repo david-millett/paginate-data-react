@@ -6,7 +6,16 @@ const App = () => {
 
   const pokemon = pokemon_data
 
-  
+  let page = 0
+  const pageLength = 10
+  const totalPages = Math.ceil(pokemon.length / pageLength)
+
+  const getPage = (page, pageLength) => {
+    const itemFirst = page * pageLength
+    const itemLast = itemFirst + pageLength
+    return pokemon.slice(itemFirst, itemLast)
+  }
+
 
   return (
     <>
@@ -24,12 +33,12 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {pokemon.map((mon) => {
+          {getPage(page, pageLength).map((pokemon) => {
             return (
-              <tr key={mon.number}>
+              <tr key={pokemon.number}>
                 {columns.map((column) => {
                   return (
-                    <td key={column}>{mon[column]}</td>
+                    <td key={column}>{pokemon[column]}</td>
                   )
                 })}
               </tr>
@@ -37,11 +46,9 @@ const App = () => {
           })}
         </tbody>
       </table>
-      {/* {pokemon.map((mon) => {
-        return (
-          <p>{mon.name}</p>
-        )
-      })} */}
+      <p>{`Page ${page + 1} of ${totalPages}`}</p>
+      <button>Prev</button>
+      <button>Next</button>
     </>
   )
 }
