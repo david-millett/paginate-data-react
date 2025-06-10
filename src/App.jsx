@@ -11,7 +11,7 @@ const App = () => {
 
   // let page = 0
   const pageLength = 10
-  const totalPages = Math.ceil(pokemon.length / pageLength)
+  const pageLast = Math.ceil(pokemon.length / pageLength)
 
   const getPage = (page, pageLength) => {
     const itemFirst = page * pageLength
@@ -54,9 +54,9 @@ const App = () => {
           })}
         </tbody>
       </table>
-      <p>{`Page ${page + 1} of ${totalPages}`}</p>
-      <button>Prev</button>
-      <button onClick={changePage}>Next</button>
+      <p>{`Page ${page + 1} of ${pageLast}`}</p>
+      <button disabled={page === 0}>Prev</button>
+      <button disabled={page === pageLast - 1} onClick={changePage}>Next</button>
     </>
   )
 }
