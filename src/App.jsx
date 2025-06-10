@@ -1,3 +1,4 @@
+import { useState } from "react"
 import pokemon_data from "./utils/data"
 
 const App = () => {
@@ -6,7 +7,9 @@ const App = () => {
 
   const pokemon = pokemon_data
 
-  let page = 0
+  const [page, setPage] = useState(0)
+
+  // let page = 0
   const pageLength = 10
   const totalPages = Math.ceil(pokemon.length / pageLength)
 
@@ -16,6 +19,11 @@ const App = () => {
     return pokemon.slice(itemFirst, itemLast)
   }
 
+  const changePage = (e) => {
+    e.preventDefault()
+    console.log(e)
+    setPage(page + 1)
+  }
 
   return (
     <>
@@ -48,7 +56,7 @@ const App = () => {
       </table>
       <p>{`Page ${page + 1} of ${totalPages}`}</p>
       <button>Prev</button>
-      <button>Next</button>
+      <button onClick={changePage}>Next</button>
     </>
   )
 }
