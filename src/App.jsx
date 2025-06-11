@@ -22,8 +22,10 @@ const App = () => {
 
   const currentPage = getPage(page, pageLength)
 
-  // Make a formula for changing pageLength - set it so itemFirst stays the same, not the page number
-
+  const changePageLength = (e) => {
+    setPageLength(e.target.value)
+    setPage(0)
+  }
 
   return (
     <>
@@ -64,7 +66,7 @@ const App = () => {
       <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
       
       <div className="flex">
-        <select id="pageLength" name="pageLength" onChange={(e) => setPageLength(e.target.value)}>
+        <select id="pageLength" name="pageLength" onChange={changePageLength}>
           <option value={5}>5</option>
           <option selected value={10}>10</option>
           <option value={15}>15</option>
