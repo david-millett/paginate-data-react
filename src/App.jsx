@@ -58,7 +58,7 @@ const App = () => {
         </tbody>
       </table>
 
-      <p>{`Showing ${currentPage.first + 1}-${currentPage.last} of ${pokemon.length}`}</p>
+      <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
       <p>{`Page ${page + 1} of ${pageLast}`}</p>
     </>
   )
