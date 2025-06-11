@@ -7,12 +7,12 @@ const App = () => {
   const pokemon = pokemon_data
   
   const [page, setPage] = useState(0)
-  const pageLength = 10
+  const [pageLength, setPageLength] = useState(10)
   const pageLast = Math.ceil(pokemon.length / pageLength)
 
   const getPage = (page, pageLength) => {
     const itemFirst = page * pageLength
-    const itemLast = itemFirst + pageLength
+    const itemLast = (page + 1) * pageLength
     return {
       data: pokemon.slice(itemFirst, itemLast),
       first: itemFirst,
@@ -21,6 +21,9 @@ const App = () => {
   }
 
   const currentPage = getPage(page, pageLength)
+
+  // Make a formula for changing pageLength - set it so itemFirst stays the same, not the page number
+
 
   return (
     <>
@@ -59,6 +62,12 @@ const App = () => {
       </table>
 
       <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
+      <select id="pageLength" name="pageLength" onChange={(e) => setPageLength(e.target.value)}>
+        <option value={5}>5</option>
+        <option selected value={10}>10</option>
+        <option value={15}>15</option>
+        <option value={20}>20</option>
+      </select><p>pokemon per page</p>
       <p>{`Page ${page + 1} of ${pageLast}`}</p>
     </>
   )
