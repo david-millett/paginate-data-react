@@ -10,6 +10,12 @@ const App = () => {
   const [pageLength, setPageLength] = useState(10)
   const pageLast = Math.ceil(pokemon.length / pageLength)
 
+  const getPageNumbers = (pageFirst, pageLast) => {
+    return Array.from({ length: pageLast - pageFirst + 1}, (_, i) => pageFirst + i)
+  }
+  const pages = getPageNumbers(0, pageLast - 1)
+  console.log(pages)
+
   const getPage = (page, pageLength) => {
     const itemFirst = page * pageLength
     const itemLast = (page + 1) * pageLength
@@ -66,16 +72,24 @@ const App = () => {
       <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
       
       <div className="flex">
-        <select id="pageLength" name="pageLength" onChange={changePageLength}>
+        <select id="pageLength" name="pageLength" value={pageLength} onChange={changePageLength}>
           <option value={5}>5</option>
-          <option selected value={10}>10</option>
+          <option value={10}>10</option>
           <option value={15}>15</option>
           <option value={20}>20</option>
         </select>
         <p>pokemon per page</p>
       </div>
       
-      <p>{`Page ${page + 1} of ${pageLast}`}</p>
+      <div className="flex">
+        <p>Page</p>
+        <select id="page" name="page" value={page + 1} onChange={(e) => {setPage(e.target.value - 1)}}>
+          {pages.map((pg) => {
+            return <option value={pg + 1}>{pg + 1}</option>
+          })}
+        </select>
+        <p>{`of ${pageLast}`}</p>
+      </div>
     </>
   )
 }
