@@ -13,8 +13,14 @@ const App = () => {
   const getPage = (page, pageLength) => {
     const itemFirst = page * pageLength
     const itemLast = itemFirst + pageLength
-    return pokemon.slice(itemFirst, itemLast)
+    return {
+      data: pokemon.slice(itemFirst, itemLast),
+      first: itemFirst,
+      last: itemLast
+    }
   }
+
+  const currentPage = getPage(page, pageLength)
 
   return (
     <>
@@ -38,7 +44,7 @@ const App = () => {
           </tr>
         </thead>
         <tbody>
-          {getPage(page, pageLength).map((pokemon) => {
+          {currentPage.data.map((pokemon) => {
             return (
               <tr key={pokemon.number}>
                 {columns.map((column) => {
@@ -52,6 +58,7 @@ const App = () => {
         </tbody>
       </table>
 
+      <p>{`Showing ${currentPage.first + 1}-${currentPage.last} of ${pokemon.length}`}</p>
       <p>{`Page ${page + 1} of ${pageLast}`}</p>
     </>
   )
