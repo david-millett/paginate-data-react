@@ -62,12 +62,17 @@ const App = () => {
       </table>
 
       <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
-      <select id="pageLength" name="pageLength" onChange={(e) => setPageLength(e.target.value)}>
-        <option value={5}>5</option>
-        <option selected value={10}>10</option>
-        <option value={15}>15</option>
-        <option value={20}>20</option>
-      </select><p>pokemon per page</p>
+      
+      <div className="flex">
+        <select id="pageLength" name="pageLength" onChange={(e) => setPageLength(e.target.value)}>
+          <option value={5}>5</option>
+          <option selected value={10}>10</option>
+          <option value={15}>15</option>
+          <option value={20}>20</option>
+        </select>
+        <p>pokemon per page</p>
+      </div>
+      
       <p>{`Page ${page + 1} of ${pageLast}`}</p>
     </>
   )
