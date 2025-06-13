@@ -16,6 +16,7 @@ const App = () => {
   const pages = getPageNumbers(0, pageLast)
   const currentPage = getPage(page, pageLength, pokemon)
   const types = getTypes(allPokemon)
+  const [selectedType, setSelectedType] = useState('default')
 
   // Function to change number of items per page and reset page to the beginning
   const changePageLength = (e) => {
@@ -23,16 +24,24 @@ const App = () => {
     setPage(0)
   }
 
-  // Function to filter and set the pokemon data
-  const changePokemonList = (e) => {
-    const selectedType = e.target.value
+  // Functions to filter and set the pokemon data
+  const changePokemonList = async (e) => {
+    const filter = e.target.value
     const filteredList = []
     allPokemon.forEach((mon) => {
-      if (mon.types.includes(selectedType)) {
+      if (mon.types.includes(filter)) {
         filteredList.push(mon)
       }
     })
+    setSelectedType(filter)
     setPokemon(filteredList)
+    setPage(0)
+  }
+
+  const removeFilter = () => {
+    setPokemon(allPokemon)
+    setSelectedType('default')
+    setPage(0)
   }
 
   return (
@@ -93,13 +102,16 @@ const App = () => {
         <p>pokemon per page</p>
       </div>
 
-      <p>Filter by type:</p>
-      <select id="types" name="types" value="default" onChange={changePokemonList}>
-        <option value="default" disabled>Select a type</option>
-        {types.map((type) => {
-          return <option value={type}>{type}</option>
-        })}
-      </select>
+      <div className="flex">
+        <p>Filter by type:</p>
+        <select id="types" name="types" value={selectedType} onChange={changePokemonList}>
+          <option value={'default'} disabled>Select</option>
+          {types.map((type) => {
+            return <option value={type}>{type}</option>
+          })}
+        </select>
+        <button disabled={allPokemon.length === pokemon.length} onClick={removeFilter}>Remove</button>
+      </div>
     </>
   )
 }
