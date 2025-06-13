@@ -1,4 +1,4 @@
-
+// Formula to extract types from pokemon data
 export const getTypes = (data) => {
     const pokemonTypes = []
     data.forEach((pokemon) => {
@@ -8,5 +8,6 @@ export const getTypes = (data) => {
             }
         })
     })
+    pokemonTypes.sort()
     return pokemonTypes
 }

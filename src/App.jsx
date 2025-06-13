@@ -1,6 +1,6 @@
 import { useState } from "react"
 import pokemon_data from "./utils/data"
-import { getTypes } from "./utils/filterData"
+import { getTypes } from "./utils/getTypes"
 
 const App = () => {
 
@@ -10,7 +10,7 @@ const App = () => {
   
   const [page, setPage] = useState(0)
   const [pageLength, setPageLength] = useState(10)
-  const [results, setResults] = useState(pokemon)
+  // const [results, setResults] = useState(pokemon)
 
   const pageLast = Math.ceil(pokemon.length / pageLength)
 
@@ -98,6 +98,14 @@ const App = () => {
         </select>
         <p>pokemon per page</p>
       </div>
+
+      <p>Filter by type:</p>
+      <select id="types" name="types">
+        <option disabled>Select a type</option>
+        {types.map((type) => {
+          return <option value={type}>{type}</option>
+        })}
+      </select>
     </>
   )
 }
