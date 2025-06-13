@@ -16,7 +16,7 @@ const App = () => {
   const pages = getPageNumbers(0, pageLast)
   const currentPage = getPage(page, pageLength, pokemon)
   const types = getTypes(allPokemon)
-  const [selectedType, setSelectedType] = useState('default')
+  const [selectedType, setSelectedType] = useState('noType')
 
   // Function to change number of items per page and reset page to the beginning
   const changePageLength = (e) => {
@@ -40,7 +40,7 @@ const App = () => {
 
   const removeFilter = () => {
     setPokemon(allPokemon)
-    setSelectedType('default')
+    setSelectedType('noType')
     setPage(0)
   }
 
@@ -105,7 +105,7 @@ const App = () => {
       <div className="flex">
         <p>Filter by type:</p>
         <select id="types" name="types" value={selectedType} onChange={changePokemonList}>
-          <option value={'default'} disabled>Select</option>
+          <option value={'noType'} disabled>Select</option>
           {types.map((type) => {
             return <option value={type}>{type}</option>
           })}
