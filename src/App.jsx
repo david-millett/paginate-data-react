@@ -8,14 +8,14 @@ const App = () => {
 
   // Variables
   const columns = ['number', 'name', 'types']
-  // const allPokemon = pokemon_data
+  const allPokemon = pokemon_data
   const [pokemon, setPokemon] = useState(pokemon_data)
   const [page, setPage] = useState(0)
   const [pageLength, setPageLength] = useState(10)
   const pageLast = Math.ceil(pokemon.length / pageLength)
   const pages = getPageNumbers(0, pageLast)
   const currentPage = getPage(page, pageLength, pokemon)
-  const types = getTypes(pokemon)
+  const types = getTypes(allPokemon)
 
   // Function to change number of items per page and reset page to the beginning
   const changePageLength = (e) => {
@@ -27,7 +27,7 @@ const App = () => {
   const changePokemonList = (e) => {
     const selectedType = e.target.value
     const filteredList = []
-    pokemon.forEach((mon) => {
+    allPokemon.forEach((mon) => {
       if (mon.types.includes(selectedType)) {
         filteredList.push(mon)
       }
