@@ -1,5 +1,6 @@
 import { useState } from "react"
 import pokemon_data from "./utils/data"
+import { getTypes } from "./utils/filterData"
 
 const App = () => {
 
@@ -9,6 +10,7 @@ const App = () => {
   
   const [page, setPage] = useState(0)
   const [pageLength, setPageLength] = useState(10)
+  const [results, setResults] = useState(pokemon)
 
   const pageLast = Math.ceil(pokemon.length / pageLength)
 
@@ -35,6 +37,9 @@ const App = () => {
     setPageLength(e.target.value)
     setPage(0)
   }
+
+  // Functions to filter pokemon data
+  const types = getTypes(pokemon)
 
   return (
     <>
