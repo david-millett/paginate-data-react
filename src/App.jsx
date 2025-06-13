@@ -1,5 +1,7 @@
 import { useState } from "react"
 import pokemon_data from "./utils/data"
+import { getPage } from "./utils/getPage"
+import { getPageNumbers } from "./utils/getPageNumbers"
 import { getTypes } from "./utils/getTypes"
 
 const App = () => {
@@ -13,33 +15,15 @@ const App = () => {
   // const [results, setResults] = useState(pokemon)
 
   const pageLast = Math.ceil(pokemon.length / pageLength)
-
-  // Function to generate an array of all pages
-  const getPageNumbers = (pageFirst, pageLast) => {
-    return Array.from({ length: pageLast - pageFirst}, (_, i) => pageFirst + i)
-  }
   const pages = getPageNumbers(0, pageLast)
-
-  // Function to isolate the data required for the current page
-  const getPage = (page, pageLength) => {
-    const itemFirst = page * pageLength
-    const itemLast = (page + 1) * pageLength
-    return {
-      data: pokemon.slice(itemFirst, itemLast),
-      first: itemFirst,
-      last: itemLast
-    }
-  }
-  const currentPage = getPage(page, pageLength)
+  const currentPage = getPage(page, pageLength, pokemon)
+  const types = getTypes(pokemon)
 
   // Function to change number of items per page and reset page to the beginning
   const changePageLength = (e) => {
     setPageLength(e.target.value)
     setPage(0)
   }
-
-  // Functions to filter pokemon data
-  const types = getTypes(pokemon)
 
   return (
     <>
