@@ -8,12 +8,10 @@ const App = () => {
 
   // Variables
   const columns = ['number', 'name', 'types']
-  const pokemon = pokemon_data
-  
+  // const allPokemon = pokemon_data
+  const [pokemon, setPokemon] = useState(pokemon_data)
   const [page, setPage] = useState(0)
   const [pageLength, setPageLength] = useState(10)
-  // const [results, setResults] = useState(pokemon)
-
   const pageLast = Math.ceil(pokemon.length / pageLength)
   const pages = getPageNumbers(0, pageLast)
   const currentPage = getPage(page, pageLength, pokemon)
@@ -23,6 +21,18 @@ const App = () => {
   const changePageLength = (e) => {
     setPageLength(e.target.value)
     setPage(0)
+  }
+
+  // Function to filter and set the pokemon data
+  const changePokemonList = (e) => {
+    const selectedType = e.target.value
+    const filteredList = []
+    pokemon.forEach((mon) => {
+      if (mon.types.includes(selectedType)) {
+        filteredList.push(mon)
+      }
+    })
+    setPokemon(filteredList)
   }
 
   return (
@@ -84,8 +94,8 @@ const App = () => {
       </div>
 
       <p>Filter by type:</p>
-      <select id="types" name="types">
-        <option disabled>Select a type</option>
+      <select id="types" name="types" value="default" onChange={changePokemonList}>
+        <option value="default" disabled>Select a type</option>
         {types.map((type) => {
           return <option value={type}>{type}</option>
         })}
