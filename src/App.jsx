@@ -45,7 +45,7 @@ const App = () => {
   }
 
   return (
-    <>
+    <main>
       <h1>Pokedex</h1>
 
       <div className="flex">
@@ -94,6 +94,7 @@ const App = () => {
       <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
       
       <div className="flex">
+        <p>Up to</p>
         <select id="pageLength" name="pageLength" value={pageLength} onChange={changePageLength}>
           <option value={5}>5</option>
           <option value={10}>10</option>
@@ -113,7 +114,7 @@ const App = () => {
         </select>
         <button disabled={allPokemon.length === pokemon.length} onClick={removeFilter}>Remove</button>
       </div>
-    </>
+    </main>
   )
 }
 
