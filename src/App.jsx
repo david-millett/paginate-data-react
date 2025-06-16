@@ -48,10 +48,21 @@ const App = () => {
     <>
       <h1>Pokedex</h1>
 
-      <button disabled={page === 0} onClick={() => setPage(0)}>First</button>
-      <button disabled={page === 0} onClick={() => setPage(page - 1)}>Prev</button>
-      <button disabled={page === pageLast - 1} onClick={() => setPage(page + 1)}>Next</button>
-      <button disabled={page === pageLast - 1} onClick={() => setPage(pageLast - 1)}>Last</button>
+      <div className="flex">
+        <button disabled={page === 0} onClick={() => setPage(0)}>&lt;&lt;</button>
+        <button disabled={page === 0} onClick={() => setPage(page - 1)}>&lt;</button>
+      
+        <p>Page</p>
+        <select id="page" name="page" value={page + 1} onChange={(e) => {setPage(e.target.value - 1)}}>
+          {pages.map((pg) => {
+            return <option value={pg + 1}>{pg + 1}</option>
+          })}
+        </select>
+        <p>{`of ${pageLast}`}</p>
+      
+        <button disabled={page === pageLast - 1} onClick={() => setPage(page + 1)}>&gt;</button>
+        <button disabled={page === pageLast - 1} onClick={() => setPage(pageLast - 1)}>&gt;&gt;</button>
+      </div>
 
       <table>
         <thead>
@@ -81,16 +92,6 @@ const App = () => {
       </table>
 
       <p>{`Showing ${currentPage.first + 1}-${Math.min(currentPage.last, pokemon.length)} of ${pokemon.length}`}</p>
-      
-      <div className="flex">
-        <p>Page</p>
-        <select id="page" name="page" value={page + 1} onChange={(e) => {setPage(e.target.value - 1)}}>
-          {pages.map((pg) => {
-            return <option value={pg + 1}>{pg + 1}</option>
-          })}
-        </select>
-        <p>{`of ${pageLast}`}</p>
-      </div>
       
       <div className="flex">
         <select id="pageLength" name="pageLength" value={pageLength} onChange={changePageLength}>
