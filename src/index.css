@@ -110,11 +110,11 @@ tr:nth-child(even) {
 .flex {
   display: flex;
   gap: 0.25rem;
+  justify-content: center;
   align-items: center;
 }
 
 .type {
-  /* background-color: black; */
   color: white;
   padding: 3px 6px;
   border-radius: 5px;
