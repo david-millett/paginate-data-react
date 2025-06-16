@@ -81,9 +81,23 @@ const App = () => {
             return (
               <tr key={pokemon.number}>
                 {columns.map((column) => {
-                  return (
-                    <td key={column}>{column != 'types' ? pokemon[column] : pokemon[column].join(' / ')}</td>
-                  )
+                  if (column === 'types') {
+                    return <td key={column}>
+                      <div className="flex">
+                        {pokemon[column].map((type) => {
+                          return <p className={`${type} type`}>{type}</p>
+                        })}
+                      </div>
+                    </td>
+                  } else {
+                    return <td key={column}>{pokemon[column]}</td>
+                  }
+                  // return (
+                    // <>
+                      // <td key={column}>{column != 'types' ? pokemon[column] : pokemon[column].join(' / ')}</td>
+                      // {column === 'types' ? <td key={column}>hey</td> : ''}
+                    // </>
+                  // )
                 })}
               </tr>
             )
