@@ -2,7 +2,7 @@ import { useState } from "react"
 import pokemon_data from "./utils/data"
 import { getPage } from "./utils/getPage"
 import { getPageNumbers } from "./utils/getPageNumbers"
-import { getTypes } from "./utils/getTypes"
+import { getTypes, typeColors } from "./utils/types"
 
 const App = () => {
 
@@ -85,7 +85,7 @@ const App = () => {
                     return <td key={column}>
                       <div className="flex">
                         {pokemon[column].map((type) => {
-                          return <p className={`${type} type`}>{type}</p>
+                          return <p key={type} className='type' style={{ backgroundColor: typeColors[type.toLowerCase()] }}>{type}</p>
                         })}
                       </div>
                     </td>
