@@ -5,7 +5,7 @@ import { getPageNumbers } from "./utils/getPageNumbers"
 import { getTypes } from "./utils/types"
 
 // Components
-import TypeBadge from "./components/typeBadge"
+import TypeBadge from "./components/TypeBadge"
 
 const App = () => {
 
@@ -28,8 +28,14 @@ const App = () => {
   }
 
   // Functions to filter and set the pokemon data
-  const changePokemonList = async (e) => {
-    const filter = e.target.value
+  const changePokemonList = (e) => {
+    let filter = ''
+    if (e.target.value) {
+      filter = e.target.value
+    } else {
+      filter = e.target.textContent
+    }
+    console.log(filter)
     const filteredList = []
     allPokemon.forEach((mon) => {
       if (mon.types.includes(filter)) {
@@ -88,7 +94,7 @@ const App = () => {
                     return <td key={column}>
                       <div className="flex">
                         {pokemon[column].map((type) => {
-                          return <TypeBadge key={type} type={type}/>
+                          return <TypeBadge key={type} type={type} changePokemonList={changePokemonList}/>
                         })}
                       </div>
                     </td>
