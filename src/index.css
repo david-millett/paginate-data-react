@@ -87,10 +87,11 @@ main {
 table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid black;
 }
 
 table, th, td {
-  border: 1px solid black;
+  border-right: 1px solid black;
 }
 
 th {
@@ -116,6 +117,7 @@ tr:nth-child(even) {
 
 .type {
   color: white;
+  text-shadow: 1px 1px 0 black;
   padding: 3px 6px;
-  border-radius: 5px;
+  border-radius: 7px;
 }
